@@ -24,7 +24,7 @@ function validate(values: Record<Field, string>): Errors {
 }
 
 const inputClass =
-  'mt-1 w-full rounded-xl border border-[#8a8f9b] bg-white px-4 py-3 text-navy aria-[invalid=true]:border-red-700'
+  'mt-1 w-full rounded-xl border border-[#8a8f9b] bg-white px-4 py-3 text-navy transition-[border-color,box-shadow] focus:border-navy aria-[invalid=true]:border-red-700'
 
 function ContactForm() {
   const { t } = useLanguage()
@@ -78,7 +78,7 @@ function ContactForm() {
     <form noValidate onSubmit={onSubmit} className="space-y-5 rounded-[2rem] bg-cream p-6 sm:p-9">
       <h3 className="text-2xl font-semibold">{t(f.title)}</h3>
       <div>{label('name')}<input {...attrs('name')} autoComplete="name" />{error('name')}</div>
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
         <div>{label('phone')}<input {...attrs('phone')} type="tel" autoComplete="tel" />{error('phone')}</div>
         <div>{label('city')}<input {...attrs('city')} autoComplete="address-level2" />{error('city')}</div>
       </div>
@@ -124,7 +124,7 @@ export default function Contact() {
   return (
     <Section id="contact" className="bg-white">
       <SectionHeading id="contact-title">{t(contact.title)}</SectionHeading>
-      <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
+      <div className="grid gap-12 md:grid-cols-[1fr_1.4fr] md:gap-8 lg:gap-16">
         <Reveal className="space-y-7">
           <Row icon={<MapPin aria-hidden />} label={t(contact.labels.address)}>
             {contact.address ? <address className="not-italic">{t(contact.address)}</address> : todo}

@@ -13,9 +13,9 @@ export default function Services() {
   return (
     <Section id="coaching" className="bg-white">
       <SectionHeading id="coaching-title">{t(services.title)}</SectionHeading>
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {services.items.map((s, i) => (
-          <Reveal key={s.title.en} delay={i * 0.1} className="flex flex-col gap-4 rounded-3xl border border-line bg-white p-7">
+          <Reveal key={s.title.en} delay={i * 0.1} className="flex flex-col gap-4 rounded-3xl border border-line bg-white p-6 transition-[border-color,box-shadow] duration-300 hover:border-gold hover:shadow-lg sm:p-7">
             <h3 className="text-2xl font-semibold">{t(s.title)}</h3>
             {s.body && <p>{t(s.body)}</p>}
             {s.details.length > 0 && (

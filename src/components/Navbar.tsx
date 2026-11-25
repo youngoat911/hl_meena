@@ -76,9 +76,9 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-40 transition-colors ${scrolled ? 'bg-white shadow-sm' : 'bg-transparent'}`}
+      className={`fixed inset-x-0 top-0 z-40 transition duration-300 ${scrolled ? 'bg-white shadow-sm' : 'bg-transparent'}`}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
+      <div className="mx-auto flex h-16 max-w-6xl 2xl:max-w-7xl items-center justify-between px-5 sm:px-8">
         <a href="#home" className="font-display text-xl font-bold text-navy">{person.shortName}</a>
         <div className="flex items-center gap-4">
           <nav aria-label={t(ui.mainNav)} className="hidden lg:block">
@@ -112,7 +112,7 @@ export default function Navbar() {
         ref={drawer}
         aria-label={t(ui.mainNav)}
         onClick={(e) => e.target === e.currentTarget && close()}
-        className="m-0 ml-auto h-dvh max-h-none w-72 max-w-[85vw] bg-white"
+        className="drawer m-0 ml-auto overflow-y-auto overscroll-contain h-dvh max-h-none w-72 max-w-[85vw] bg-white"
       >
         <div className="flex h-full flex-col p-5">
           <button

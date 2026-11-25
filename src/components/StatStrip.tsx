@@ -7,7 +7,7 @@ export default function StatStrip() {
   const real = stats.flatMap((s) => (s.value ? [{ value: s.value, label: s.label }] : []))
   if (real.length === 0) return null
   return (
-    <div className="mx-auto mt-14 max-w-6xl px-5 sm:px-8">
+    <div className="mx-auto mt-14 max-w-6xl 2xl:max-w-7xl px-5 sm:px-8">
       <ul className="flex flex-wrap justify-center gap-x-12 gap-y-6 rounded-3xl bg-white px-6 py-6 shadow-sm">
         {real.map((s) => (
           <li key={s.label.en} className="flex items-center gap-4">

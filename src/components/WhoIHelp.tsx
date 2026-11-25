@@ -13,7 +13,7 @@ export default function WhoIHelp() {
   return (
     <Section id="who-i-help">
       <SectionHeading id="who-i-help-title">{t(whoIHelp.title)}</SectionHeading>
-      <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+      <div className="grid gap-10 md:grid-cols-2 lg:gap-16">
         <Reveal>
           <ul className="space-y-8">
             {whoIHelp.audiences.map((a) => {
@@ -30,7 +30,7 @@ export default function WhoIHelp() {
             })}
           </ul>
         </Reveal>
-        <Reveal className="on-navy rounded-[2rem] bg-navy p-8 text-white sm:p-10">
+        <Reveal className="on-navy rounded-[2rem] bg-navy p-6 text-white sm:p-8 lg:p-10">
           <h3 className="mb-5 text-xl font-semibold text-white">{t(whoIHelp.problemsTitle)}</h3>
           <ul className="space-y-3">
             {whoIHelp.problems.map((p) => (

@@ -27,7 +27,9 @@ All copy, links, stats and media are in **`src/data/site.ts`**. Nothing else nee
 
 ## Images
 
-Source photos are in `data/images/`; the site serves WebP from `public/images/`, in four widths named `<name>-480.webp`, `<name>-640.webp`, `<name>-800.webp` and `<name>-1087.webp`. To add or replace one (needs ImageMagick):
+The site shows one photo, in the hero (`hero.image`).
+
+Source photos are in `data/images/`; the site serves WebP from `public/images/`, in four widths named `<name>-480.webp`, `<name>-640.webp`, `<name>-800.webp` and `<name>-1087.webp`. To replace it (needs ImageMagick):
 
 ```bash
 for w in 480 640 800 1087; do
@@ -35,7 +37,7 @@ for w in 480 640 800 1087; do
 done
 ```
 
-Then use `NAME` in `site.ts`. `position` and `zoom` control the crop. `certificate-master-life-coach-1600.webp` is the lightbox image and `og.jpg` (1200×630) is the social preview.
+Then set `hero.image.name` to `NAME`. `position` and `zoom` control the crop. `og.jpg` (1200×630) is the social preview.
 
 ## Remaining TODOs
 

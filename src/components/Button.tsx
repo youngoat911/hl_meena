@@ -3,7 +3,7 @@ import { ui } from '../data/site'
 import { useLanguage } from '../lib/language'
 
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-center font-display font-semibold transition-colors'
+  'inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-center font-display font-semibold transition duration-200 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0'
 const variants = {
   gold: 'bg-gold text-navy-deep hover:bg-[#dab43a]',
   outline: 'border-2 border-navy text-navy hover:bg-navy hover:text-white',

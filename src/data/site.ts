@@ -82,7 +82,7 @@ export const hero = {
     alt: { en: 'Heeralal Meena seated at his office desk, smiling gently' },
     position: '20% 0%',
     zoom: 1.2,
-    sizes: '(min-width: 1024px) 480px, (min-width: 480px) 448px, 92vw',
+    sizes: '(min-width: 1024px) 480px, (min-width: 768px) 42vw, (min-width: 480px) 448px, 92vw',
   } as Photo,
 }
 
@@ -108,12 +108,6 @@ export const about = {
   belief: {
     en: 'I believe everyone already has the strength to change their life. Sometimes they just need the right questions, the right guidance and someone who believes in them.',
   } as Text,
-  image: {
-    name: 'portrait-seated-desk',
-    alt: { en: 'Heeralal Meena at his desk with books and notes beside him' },
-    position: '25% 0%',
-    sizes: '(min-width: 1024px) 420px, (min-width: 480px) 448px, 92vw',
-  } as Photo,
 }
 
 /* ------------------------------------------------------------ 4. Story */
@@ -127,13 +121,6 @@ export const story = {
   ] as { title: Text; body: Maybe<Text>; todo: Text }[],
   quote: null as Maybe<Text>,
   quoteTodo: { en: 'One line he says often to clients.' } as Text,
-  image: {
-    name: 'portrait-thoughtful',
-    alt: { en: 'Heeralal Meena leaning on a chair with his hand at his chin, looking thoughtful' },
-    position: '85% 0%',
-    zoom: 1.35,
-    sizes: '(min-width: 1024px) 420px, (min-width: 480px) 448px, 92vw',
-  } as Photo,
 }
 
 /* ------------------------------------- 5. How I Coach (starter copy) */
@@ -229,14 +216,6 @@ export const certification = {
     { label: { en: 'Signed by' }, value: { en: 'Sneh Desai, Life & Business Coach' } },
     { label: { en: 'Date' }, value: { en: '30 September 2025' } },
   ] as { label: Text; value: Text }[],
-  image: {
-    name: 'certificate-master-life-coach',
-    alt: { en: 'Framed certificate naming Heeralal Meena a Master Life Coach, issued by Sneh Academy on 30 September 2025' },
-    position: 'center',
-    sizes: '(min-width: 1024px) 600px, 92vw',
-  } as Photo,
-  fullImage: '/images/certificate-master-life-coach-1600.webp',
-  viewLabel: { en: 'Click to view full size' } as Text,
   /** Add other credentials here, e.g. [{ en: 'M.A. Psychology, ...' }] */
   others: [] as Text[],
   othersTitle: { en: 'Other credentials' } as Text,
@@ -268,12 +247,6 @@ export const ctaBanner = {
   title: { en: 'The change you want starts with one conversation.' } as Text,
   body: { en: "Let's find your clarity together." } as Text,
   cta: { en: 'Book Your Session on WhatsApp' } as Text,
-  image: {
-    name: 'portrait-chair-lean',
-    alt: { en: '' },
-    position: '85% 8%',
-    sizes: '(min-width: 1024px) 520px, 100vw',
-  } as Photo,
 }
 
 /* ------------------------------------------------ 12. Contact & footer */
@@ -338,7 +311,6 @@ export const ui = {
   mainNav: { en: 'Main' } as Text,
   openMenu: { en: 'Open menu' } as Text,
   closeMenu: { en: 'Close menu' } as Text,
-  close: { en: 'Close' } as Text,
   todo: { en: 'TODO' } as Text,
   newTab: { en: '(opens in a new tab)' } as Text,
   play: { en: 'Play video' } as Text,

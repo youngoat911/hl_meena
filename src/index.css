@@ -26,6 +26,23 @@
   body:has(dialog[open]) { overflow: hidden; }
 }
 
+/* Hero entrance and drawer: plain CSS, so they run before JavaScript loads */
+@media (prefers-reduced-motion: no-preference) {
+  .rise { animation: rise 0.6s ease-out backwards; }
+  .shape-in { animation: shape-in 0.8s ease-out backwards; }
+  .drawer, .drawer::backdrop {
+    transition: transform 0.3s ease-out, opacity 0.3s, overlay 0.3s allow-discrete, display 0.3s allow-discrete;
+  }
+  .drawer:not([open]) { transform: translateX(100%); }
+  .drawer:not([open])::backdrop { opacity: 0; }
+  @starting-style {
+    .drawer[open] { transform: translateX(100%); }
+    .drawer[open]::backdrop { opacity: 0; }
+  }
+}
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+@keyframes shape-in { from { opacity: 0; transform: translate(-18px, -18px); } }
+
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
