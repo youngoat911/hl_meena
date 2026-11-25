@@ -1,0 +1,31 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter/wght.css';
+@import '@fontsource-variable/outfit/wght.css';
+
+@theme {
+  --color-navy: #1b2a4a;
+  --color-navy-deep: #131f38;
+  --color-gold: #c9a227;
+  --color-gold-soft: #f1e6c3;
+  --color-cream: #faf7f0;
+  --color-muted: #535b6b;
+  --color-line: #e6dfcf;
+  --font-sans: 'Inter Variable', 'Noto Sans Devanagari', system-ui, sans-serif;
+  --font-display: 'Outfit Variable', 'Hind', 'Noto Sans Devanagari', system-ui, sans-serif;
+}
+
+@layer base {
+  html { scroll-padding-top: 5rem; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  body { @apply bg-cream font-sans text-muted leading-relaxed antialiased; }
+  h1, h2, h3 { @apply font-display text-navy text-balance; }
+  button { cursor: pointer; }
+  :focus-visible { outline: 3px solid var(--color-navy); outline-offset: 3px; border-radius: 6px; }
+  .on-navy :focus-visible { outline-color: var(--color-gold); }
+  dialog::backdrop { background: rgb(19 31 56 / 0.85); }
+  body:has(dialog[open]) { overflow: hidden; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
