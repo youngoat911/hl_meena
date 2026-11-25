@@ -12,6 +12,7 @@ export type Maybe<T> = T | null
 export type Photo = { name: string; alt: Text; position: string; sizes: string; zoom?: number }
 export type Stat = { value: Maybe<Text>; label: Text }
 export type Service = {
+  icon: 'session' | 'call' | 'group'
   title: Text
   body: Maybe<Text>
   details: { label: Text; value: Maybe<Text> }[]
@@ -19,7 +20,6 @@ export type Service = {
   todo: Maybe<Text>
   showCta: boolean
 }
-export type Testimonial = { name: string; city: string; quote: Text }
 export type Video = { url: string; title: Text }
 export type SocialId = 'youtube' | 'facebook' | 'instagram' | 'linkedin'
 
@@ -176,6 +176,7 @@ export const services = {
   cta: { en: 'Book a session' } as Text,
   items: [
     {
+      icon: 'session',
       title: { en: '1-on-1 Life Coaching' },
       body: { en: 'Personal sessions tailored to your goals and challenges.' },
       details: [
@@ -186,6 +187,7 @@ export const services = {
       showCta: true,
     },
     {
+      icon: 'call',
       title: { en: 'Free Discovery Call' },
       body: { en: 'A short call to understand your situation and see if coaching is right for you.' },
       details: [],
@@ -193,6 +195,7 @@ export const services = {
       showCta: false,
     },
     {
+      icon: 'group',
       title: { en: 'Workshops / Group Sessions' },
       body: null,
       details: [],
@@ -230,15 +233,6 @@ export const videos = {
   cta: { en: 'Watch on YouTube' } as Text,
   /** TODO: add 3–6, e.g. { url: 'https://youtu.be/XXXXXXXXXXX', title: { en: '...' } } */
   items: [] as Video[],
-}
-
-/* ----------------------------------------------------- 10. Testimonials */
-
-export const testimonials = {
-  title: { en: 'Testimonials' } as Text,
-  /** TODO: 3–5 real ones only. */
-  items: [] as Testimonial[],
-  todo: { en: 'Real testimonials to be collected.' } as Text,
 }
 
 /* ------------------------------------------------------ 11. CTA banner */
@@ -308,6 +302,7 @@ export const footer = {
 
 export const ui = {
   skip: { en: 'Skip to content' } as Text,
+  footerNav: { en: 'Footer' } as Text,
   mainNav: { en: 'Main' } as Text,
   openMenu: { en: 'Open menu' } as Text,
   closeMenu: { en: 'Close menu' } as Text,

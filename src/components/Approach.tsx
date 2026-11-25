@@ -17,7 +17,20 @@ export default function Approach() {
         {approach.steps.map((s, i) => {
           const Icon = icons[s.icon]
           return (
-            <li key={s.title.en}>
+            <li key={s.title.en} className="relative">
+              {i < approach.steps.length - 1 && (
+                <svg aria-hidden className="absolute top-7 left-32 hidden h-1 w-[calc(100%-7rem)] md:block">
+                  <line
+                    x2="100%"
+                    y1="2"
+                    y2="2"
+                    className="stroke-gold"
+                    strokeWidth="3"
+                    strokeDasharray="2 12"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              )}
               <Reveal delay={i * 0.1}>
                 <div className="mb-5 flex items-center gap-4">
                   <span className="grid size-14 place-items-center rounded-2xl bg-navy text-gold">

@@ -5,6 +5,7 @@ import { useLanguage } from '../lib/language'
 import { cleanUrl } from '../lib/links'
 import BrandIcon from './BrandIcon'
 import Button from './Button'
+import { HeroBackdrop } from './Illustrations'
 import Picture from './Picture'
 import StatStrip from './StatStrip'
 
@@ -12,7 +13,8 @@ export default function Hero() {
   const { t } = useLanguage()
   const youtube = socials.find((s) => s.id === 'youtube')?.url
   return (
-    <section id="home" aria-labelledby="home-title" className="pt-24 pb-14 md:pt-28 lg:pt-32">
+    <section id="home" aria-labelledby="home-title" className="relative isolate pt-24 pb-14 md:pt-28 lg:pt-32">
+      <HeroBackdrop />
       <div className="mx-auto grid max-w-6xl 2xl:max-w-7xl items-center gap-10 px-5 sm:px-8 md:grid-cols-[1.15fr_1fr] lg:gap-16">
         <div>
           <p className="rise mb-5 inline-block rounded-full bg-gold-soft px-4 py-1.5 text-sm font-semibold text-navy">

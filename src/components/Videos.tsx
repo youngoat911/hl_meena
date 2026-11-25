@@ -4,6 +4,7 @@ import { cleanUrl, youtubeId } from '../lib/links'
 import BrandIcon from './BrandIcon'
 import Button from './Button'
 import LiteYouTube from './LiteYouTube'
+import { VideoScreen } from './Illustrations'
 import Reveal from './Reveal'
 import Section from './Section'
 import SectionHeading from './SectionHeading'
@@ -17,10 +18,22 @@ export default function Videos() {
   })
   return (
     <Section id="videos" className="bg-white">
-      <SectionHeading id="videos-title">{t(videos.title)}</SectionHeading>
-      <p className="-mt-4 mb-8 text-lg">{t(videos.line)}</p>
+      <div className="grid items-center gap-10 md:grid-cols-2 lg:gap-20">
+        <div>
+          <SectionHeading id="videos-title">{t(videos.title)}</SectionHeading>
+          <p className="-mt-4 mb-8 text-lg">{t(videos.line)}</p>
+          {youtube && (
+            <Button href={cleanUrl(youtube)} variant="outline">
+              <BrandIcon id="youtube" /> {t(videos.cta)}
+            </Button>
+          )}
+        </div>
+        <Reveal delay={0.15}>
+          <VideoScreen className="mx-auto w-full max-w-md" />
+        </Reveal>
+      </div>
       {items.length > 0 && (
-        <ul className="mb-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((v) => (
             <li key={v.id}>
               <Reveal>
@@ -30,11 +43,6 @@ export default function Videos() {
             </li>
           ))}
         </ul>
-      )}
-      {youtube && (
-        <Button href={cleanUrl(youtube)} variant="outline">
-          <BrandIcon id="youtube" /> {t(videos.cta)}
-        </Button>
       )}
     </Section>
   )

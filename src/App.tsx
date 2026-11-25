@@ -9,7 +9,6 @@ import Hero from './components/Hero'
 import Navbar from './components/Navbar'
 import Services from './components/Services'
 import Story from './components/Story'
-import Testimonials from './components/Testimonials'
 import Videos from './components/Videos'
 import WhatsAppButton from './components/WhatsAppButton'
 import WhoIHelp from './components/WhoIHelp'
@@ -35,7 +34,6 @@ function Page() {
         <Services />
         <Certification />
         <Videos />
-        <Testimonials />
         <CtaBanner />
         <Contact />
       </main>

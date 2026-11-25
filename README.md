@@ -58,7 +58,6 @@ Then set `hero.image.name` to `NAME`. `position` and `zoom` control the crop. `o
 | Education, other certifications, awards (including the office trophy) | `certification.others` |
 | 3–6 YouTube video links | `videos.items` |
 | Facebook reels: confirm whose they are | `socials` |
-| 3–5 real testimonials | `testimonials.items` |
 | Office address, phone/WhatsApp, email | `contact` |
 | Facebook, Instagram, LinkedIn URLs | `socials` |
 

@@ -5,6 +5,7 @@ import { useLanguage } from '../lib/language'
 import { cleanUrl, mailtoUrl, whatsappUrl } from '../lib/links'
 import BrandIcon from './BrandIcon'
 import Button from './Button'
+import { PaperPlane } from './Illustrations'
 import Reveal from './Reveal'
 import Section from './Section'
 import SectionHeading from './SectionHeading'
@@ -140,6 +141,7 @@ export default function Contact() {
               <a className={link} href={cleanUrl(youtube)} target="_blank" rel="noopener noreferrer">{contact.youtubeHandle}</a>
             </Row>
           )}
+          <PaperPlane className="hidden w-full max-w-sm pt-4 md:block" />
         </Reveal>
         <Reveal><ContactForm /></Reveal>
       </div>
