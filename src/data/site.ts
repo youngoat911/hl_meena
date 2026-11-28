@@ -23,6 +23,14 @@ export type Service = {
 export type Video = { url: string; title: Text }
 export type SocialId = 'youtube' | 'facebook' | 'instagram' | 'linkedin'
 
+/* ------------------------------------------------------------- Display */
+
+/**
+ * false: anything still missing is hidden from the page.
+ * true: missing items show as dashed TODO boxes (handy while collecting content).
+ */
+export const showTodos: boolean = false
+
 /* ------------------------------------------------------------- Language */
 
 /** TODO: confirm English only or Hindi + English. `true` shows the EN/हिंदी toggle. */
@@ -30,20 +38,25 @@ export const hindiEnabled: boolean = false
 
 /* ------------------------------------------------------------- 0. Meta */
 
-export const person = { name: 'Heeralal Meena', shortName: 'H.L. Meena' }
+export const person = {
+  name: 'Heeralal Meena',
+  shortName: 'H.L. Meena',
+  /** Where he lives; used for search engines. */
+  city: 'Udaipur',
+  region: 'Rajasthan',
+  country: 'IN',
+}
 
 export const meta = {
   title: { en: 'Heeralal Meena | Certified Master Life Coach' } as Text,
-  // TODO: add city
   description: {
-    en: 'Heeralal Meena (H.L. Meena) is a certified Master Life Coach helping people gain clarity, build confidence and move forward with purpose. Book a 1-on-1 coaching session.',
+    en: 'Heeralal Meena (H.L. Meena) is a certified Master Life Coach in Udaipur, Rajasthan, helping people gain clarity, build confidence and move forward with purpose. Book a 1-on-1 coaching session.',
   } as Text,
-  // TODO: add city to "life coach", and "master life coach Rajasthan" once the state is confirmed
   keywords: [
-    'life coach',
+    'life coach Udaipur',
     'H.L. Meena',
     'Heeralal Meena life coach',
-    'master life coach',
+    'master life coach Rajasthan',
     'personal growth coaching',
     'Hindi life coach',
   ],
@@ -101,10 +114,10 @@ export const about = {
   intro: {
     en: "I'm a certified Master Life Coach, trained through the Life Coach Certification program at Sneh Academy under Sneh Desai, Life & Business Coach.",
   } as Text,
-  background: null as Maybe<Text>,
-  backgroundTodo: {
-    en: "Where he's from and where he's based, his background and profession, and why he became a coach.",
-  } as Text,
+  background: {
+    en: 'I was born in Kerpura, a small village in the Sarada Tehsil area of Salumbar district, Rajasthan, in a simple rural family. I currently live in Udaipur, Rajasthan.',
+  } as Maybe<Text>,
+  backgroundTodo: { en: "Where he's from and where he's based." } as Text,
   belief: {
     en: 'I believe everyone already has the strength to change their life. Sometimes they just need the right questions, the right guidance and someone who believes in them.',
   } as Text,
@@ -112,15 +125,65 @@ export const about = {
 
 /* ------------------------------------------------------------ 4. Story */
 
+export type StoryPart = { title: Maybe<Text>; paragraphs: Paragraph[] }
+/** `emphasis` shows a line as a highlighted statement. */
+export type Paragraph = Text & { emphasis?: boolean }
+
+/** His own words (received 2026-11-28). */
 export const story = {
   title: { en: 'My Story' } as Text,
+  subtitle: { en: 'From Struggle to Success and Helping Others Transform Their Lives' } as Text,
   parts: [
-    { title: { en: 'The turning point' }, body: null, todo: { en: 'A moment or struggle in his own life that made him value guidance.' } },
-    { title: { en: 'The learning' }, body: null, todo: { en: 'What he studied and practised.' } },
-    { title: { en: 'The calling' }, body: null, todo: { en: 'Why he now coaches others and what drives him.' } },
-  ] as { title: Text; body: Maybe<Text>; todo: Text }[],
-  quote: null as Maybe<Text>,
+    {
+      title: null,
+      paragraphs: [
+        { en: 'I come from a rural and tribal background. My life was not easy from the beginning. I have not merely witnessed poverty and struggle from a distance—I have experienced them firsthand.' },
+        { en: 'During my childhood, I worked as a laborer, herded goats, and worked day and night as a waiter in catering. I have done many different kinds of work that a person from a poor rural and tribal family may have to do to survive and move forward in life.' },
+        { en: 'Despite these circumstances, I always had a dream within me—to do something meaningful in life and change my circumstances.' },
+        { en: 'At around the age of 21, I appeared for competitive examinations for government service. In 2008, I appeared for the Gram Vikas Adhikari examination and secured the top position in Udaipur district from the ST/TSP area.' },
+        { en: 'After that, I went on to qualify more than half a dozen competitive examinations for various government services.' },
+        { en: 'For me, this was not simply a success story about getting a government job. It was proof that when a person has faith in their goal, the willingness to work hard, and a strong determination to move forward, even the most difficult circumstances can be changed.' },
+      ],
+    },
+    {
+      title: { en: 'This Is Where a New Thought Took Root in Me' },
+      paragraphs: [
+        { en: 'When I looked back at my own struggles, I realized that there are many young people like me who have dreams, the desire to achieve something, and the potential to move forward in life.' },
+        { en: 'But they often do not receive the right information and proper guidance at the right time.' },
+        { en: 'Many times, they do not know what they should do next. When they face failure, their confidence begins to break. They lose direction and gradually start believing:' },
+        { en: '“Maybe I cannot do this.”', emphasis: true },
+        { en: 'This kind of thinking can lead many young people toward hopelessness and emotional stress. Some even begin to lose hope in life itself.' },
+        { en: 'I realized that if I could find a way to overcome my struggles and move forward, then I could also use my experiences to help others find their way.' },
+      ],
+    },
+    {
+      title: { en: 'Why I Chose Life Coaching' },
+      paragraphs: [
+        { en: 'I did not become a Life Coach simply to give people motivational talks.' },
+        { en: 'I want the real experiences and lessons from my own life to become useful to someone else.' },
+        { en: 'I want to help young people and individuals who want to build a better life but need direction, clarity, confidence, or the right guidance.' },
+        { en: 'I want to help them understand one important truth:' },
+        { en: 'Your present circumstances are not your final destination.', emphasis: true },
+        { en: 'Where you were born, how many resources you have today, or how many difficulties you are facing—none of these things have to define your entire story.' },
+        { en: 'Your thinking, decisions, hard work, and the right actions taken in the right direction can change your life.' },
+      ],
+    },
+    {
+      title: { en: 'My Purpose' },
+      paragraphs: [
+        { en: 'My purpose is not merely to motivate people. I want to help them understand themselves, recognize their strengths, set clear goals, and take practical steps toward achieving those goals.' },
+        { en: "I want the lessons I have learned through my own struggles to become a source of hope and direction in someone else's life." },
+        { en: 'My story is not just a story of struggle. It is a story of believing that circumstances can be changed.' },
+        { en: 'And today, my purpose is:' },
+      ],
+    },
+  ] as StoryPart[],
+  quote: { en: '“I want to hold the hand of those who want to move forward but cannot see the path ahead.”' } as Maybe<Text>,
   quoteTodo: { en: 'One line he says often to clients.' } as Text,
+  signature: { en: 'H. L. Meena – Life Coach' } as Text,
+  closing: {
+    en: 'I learned through struggle, understood through experience, and today I am committed to helping others move forward.',
+  } as Text,
 }
 
 /* ------------------------------------- 5. How I Coach (starter copy) */
@@ -166,7 +229,7 @@ export const whoIHelp = {
     { en: 'Negative thinking and stress' },
   ] as Text[],
   /** Set to null once confirmed. */
-  todo: { en: 'Confirm his real target audience.' } as Maybe<Text>,
+  todo: null as Maybe<Text>,
 }
 
 /* --------------------------------------------------------- 7. Services */
@@ -219,10 +282,14 @@ export const certification = {
     { label: { en: 'Signed by' }, value: { en: 'Sneh Desai, Life & Business Coach' } },
     { label: { en: 'Date' }, value: { en: '30 September 2025' } },
   ] as { label: Text; value: Text }[],
-  /** Add other credentials here, e.g. [{ en: 'M.A. Psychology, ...' }] */
-  others: [] as Text[],
-  othersTitle: { en: 'Other credentials' } as Text,
-  othersTodo: { en: 'Education / degrees, other certifications and awards.' } as Text,
+  /** Other credentials and achievements */
+  others: [
+    { en: 'Gram Vikas Adhikari examination (2008): top position in Udaipur district from the ST/TSP area' },
+    { en: 'Qualified more than half a dozen competitive examinations for various government services' },
+  ] as Text[],
+  othersTitle: { en: 'Achievements' } as Text,
+  /** Set to null once education and any other certificates or awards are added. */
+  othersTodo: { en: 'Education / degrees, other certifications and awards.' } as Maybe<Text>,
 }
 
 /* ----------------------------------------------------------- 9. Videos */
@@ -247,14 +314,15 @@ export const ctaBanner = {
 
 export const contact = {
   title: { en: 'Contact' } as Text,
-  /** TODO: office address */
-  address: null as Maybe<Text>,
+  /** Office address can replace the city when available. */
+  address: { en: 'Udaipur, Rajasthan' } as Maybe<Text>,
   /** TODO: with country code, e.g. '+91 98765 43210'. Turns on every WhatsApp link. */
   phone: null as Maybe<string>,
   /** TODO */
   email: null as Maybe<string>,
   labels: {
-    address: { en: 'Location / office address' } as Text,
+    address: { en: 'Location' } as Text,
+    facebook: { en: 'Facebook' } as Text,
     phone: { en: 'Phone / WhatsApp' } as Text,
     email: { en: 'Email' } as Text,
     youtube: { en: 'YouTube' } as Text,
@@ -281,6 +349,12 @@ export const contact = {
     } as Text,
   },
   /** Pre-filled text for the booking buttons */
+  /** Shown instead of the form while there is no phone number or email. */
+  reachOut: {
+    title: { en: 'Get in touch' } as Text,
+    body: { en: 'Send me a message on Facebook.' } as Text,
+    cta: { en: 'Message on Facebook' } as Text,
+  },
   bookingMessage: { en: 'Namaste, I would like to book a 1-on-1 session.' } as Text,
   emailSubject: { en: 'Book a 1-on-1 session' } as Text,
 }
@@ -288,7 +362,8 @@ export const contact = {
 /** Icons are hidden while the url is null. */
 export const socials: { id: SocialId; label: string; url: Maybe<string> }[] = [
   { id: 'youtube', label: 'YouTube', url: 'https://www.youtube.com/@h_l_meena' },
-  { id: 'facebook', label: 'Facebook', url: null }, // TODO: direct profile/page URL
+  // Share link sent by him; swap for the direct profile/page URL when available.
+  { id: 'facebook', label: 'Facebook', url: 'https://www.facebook.com/share/18mCypjDMN/' },
   { id: 'instagram', label: 'Instagram', url: null }, // TODO
   { id: 'linkedin', label: 'LinkedIn', url: null }, // TODO
 ]

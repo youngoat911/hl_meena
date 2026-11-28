@@ -1,6 +1,6 @@
 import { useState, type FormEvent, type ReactNode } from 'react'
 import { Mail, MapPin, Phone } from 'lucide-react'
-import { contact, socials, type Text } from '../data/site'
+import { contact, person, showTodos, socials, type Text } from '../data/site'
 import { useLanguage } from '../lib/language'
 import { cleanUrl, mailtoUrl, whatsappUrl } from '../lib/links'
 import BrandIcon from './BrandIcon'
@@ -36,9 +36,7 @@ function ContactForm() {
     e.preventDefault()
     const form = e.currentTarget
     const data = new FormData(form)
-    const values = Object.fromEntries(
-      fields.map((k) => [k, String(data.get(k) ?? '').trim()]),
-    ) as Record<Field, string>
+    const values = Object.fromEntries(fields.map((k) => [k, String(data.get(k) ?? '').trim()])) as Record<Field, string>
     const found = validate(values)
     setErrors(found)
     setNotice(null)
@@ -69,21 +67,45 @@ function ContactForm() {
   })
   const error = (k: Field) => {
     const text = errors[k]
-    return text && <p id={`error-${k}`} className="mt-1 text-sm text-red-700">{t(text)}</p>
+    return (
+      text && (
+        <p id={`error-${k}`} className="mt-1 text-sm text-red-700">
+          {t(text)}
+        </p>
+      )
+    )
   }
   const label = (k: Field) => (
-    <label htmlFor={`field-${k}`} className="font-medium text-navy">{t(f[k])}</label>
+    <label htmlFor={`field-${k}`} className="font-medium text-navy">
+      {t(f[k])}
+    </label>
   )
 
   return (
     <form noValidate onSubmit={onSubmit} className="space-y-5 rounded-[2rem] bg-cream p-6 sm:p-9">
       <h3 className="text-2xl font-semibold">{t(f.title)}</h3>
-      <div>{label('name')}<input {...attrs('name')} autoComplete="name" />{error('name')}</div>
-      <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
-        <div>{label('phone')}<input {...attrs('phone')} type="tel" autoComplete="tel" />{error('phone')}</div>
-        <div>{label('city')}<input {...attrs('city')} autoComplete="address-level2" />{error('city')}</div>
+      <div>
+        {label('name')}
+        <input {...attrs('name')} autoComplete="name" />
+        {error('name')}
       </div>
-      <div>{label('help')}<textarea {...attrs('help')} rows={4} />{error('help')}</div>
+      <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
+        <div>
+          {label('phone')}
+          <input {...attrs('phone')} type="tel" autoComplete="tel" />
+          {error('phone')}
+        </div>
+        <div>
+          {label('city')}
+          <input {...attrs('city')} autoComplete="address-level2" />
+          {error('city')}
+        </div>
+      </div>
+      <div>
+        {label('help')}
+        <textarea {...attrs('help')} rows={4} />
+        {error('help')}
+      </div>
       <fieldset aria-describedby={errors.mode ? 'error-mode' : undefined}>
         <legend className="font-medium text-navy">{t(f.mode)}</legend>
         <div className="mt-2 flex flex-wrap gap-x-6 gap-y-2">
@@ -98,9 +120,7 @@ function ContactForm() {
       <Button className="w-full sm:w-auto">
         {t(contact.phone ? f.submitWhatsapp : contact.email ? f.submitEmail : f.submitPending)}
       </Button>
-      <div role="status">
-        {notice && <p className="rounded-xl bg-gold-soft px-4 py-3 text-navy">{t(notice)}</p>}
-      </div>
+      <div role="status">{notice && <p className="rounded-xl bg-gold-soft px-4 py-3 text-navy">{t(notice)}</p>}</div>
     </form>
   )
 }
@@ -117,33 +137,80 @@ function Row({ icon, label, children }: { icon: ReactNode; label: string; childr
   )
 }
 
+function ReachOut({ facebook }: { facebook: string }) {
+  const { t } = useLanguage()
+  const r = contact.reachOut
+  return (
+    <div className="on-navy rounded-[2rem] bg-navy p-7 text-white sm:p-10">
+      <h3 className="text-2xl font-semibold text-white">{t(r.title)}</h3>
+      <p className="mt-3 mb-7 text-lg text-white/85">{t(r.body)}</p>
+      <Button href={facebook}>
+        <BrandIcon id="facebook" /> {t(r.cta)}
+      </Button>
+    </div>
+  )
+}
+
 export default function Contact() {
   const { t } = useLanguage()
   const youtube = socials.find((s) => s.id === 'youtube')?.url
+  const facebook = socials.find((s) => s.id === 'facebook')?.url
   const todo = <Todo text={contact.pendingTodo} />
   const link = 'text-navy underline decoration-gold decoration-2 underline-offset-4'
+  const external = { target: '_blank', rel: 'noopener noreferrer' }
+  // The form needs somewhere to send to; until then visitors are pointed to Facebook.
+  const canSend = Boolean(contact.phone || contact.email)
   return (
     <Section id="contact" className="bg-white">
       <SectionHeading id="contact-title">{t(contact.title)}</SectionHeading>
       <div className="grid gap-12 md:grid-cols-[1fr_1.4fr] md:gap-8 lg:gap-16">
         <Reveal className="space-y-7">
-          <Row icon={<MapPin aria-hidden />} label={t(contact.labels.address)}>
-            {contact.address ? <address className="not-italic">{t(contact.address)}</address> : todo}
-          </Row>
-          <Row icon={<Phone aria-hidden />} label={t(contact.labels.phone)}>
-            {contact.phone ? <a className={link} href={`tel:${contact.phone.replace(/[^+\d]/g, '')}`}>{contact.phone}</a> : todo}
-          </Row>
-          <Row icon={<Mail aria-hidden />} label={t(contact.labels.email)}>
-            {contact.email ? <a className={`${link} break-all`} href={`mailto:${contact.email}`}>{contact.email}</a> : todo}
-          </Row>
+          {(contact.address || showTodos) && (
+            <Row icon={<MapPin aria-hidden />} label={t(contact.labels.address)}>
+              {contact.address ? <address className="not-italic">{t(contact.address)}</address> : todo}
+            </Row>
+          )}
+          {(contact.phone || showTodos) && (
+            <Row icon={<Phone aria-hidden />} label={t(contact.labels.phone)}>
+              {contact.phone ? (
+                <a className={link} href={`tel:${contact.phone.replace(/[^+\d]/g, '')}`}>
+                  {contact.phone}
+                </a>
+              ) : (
+                todo
+              )}
+            </Row>
+          )}
+          {(contact.email || showTodos) && (
+            <Row icon={<Mail aria-hidden />} label={t(contact.labels.email)}>
+              {contact.email ? (
+                <a className={`${link} break-all`} href={`mailto:${contact.email}`}>
+                  {contact.email}
+                </a>
+              ) : (
+                todo
+              )}
+            </Row>
+          )}
           {youtube && (
             <Row icon={<BrandIcon id="youtube" className="size-6" />} label={t(contact.labels.youtube)}>
-              <a className={link} href={cleanUrl(youtube)} target="_blank" rel="noopener noreferrer">{contact.youtubeHandle}</a>
+              <a className={link} href={cleanUrl(youtube)} {...external}>
+                {contact.youtubeHandle}
+              </a>
+            </Row>
+          )}
+          {facebook && (
+            <Row icon={<BrandIcon id="facebook" className="size-6" />} label={t(contact.labels.facebook)}>
+              <a className={link} href={cleanUrl(facebook)} {...external}>
+                {person.name}
+              </a>
             </Row>
           )}
           <PaperPlane className="hidden w-full max-w-sm pt-4 md:block" />
         </Reveal>
-        <Reveal><ContactForm /></Reveal>
+        <Reveal>
+          {canSend || showTodos || !facebook ? <ContactForm /> : <ReachOut facebook={cleanUrl(facebook)} />}
+        </Reveal>
       </div>
     </Section>
   )

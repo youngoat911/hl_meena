@@ -1,4 +1,4 @@
-import { BadgeCheck } from 'lucide-react'
+import { BadgeCheck, Trophy } from 'lucide-react'
 import { certification as c } from '../data/site'
 import { useLanguage } from '../lib/language'
 import { SealedSheet } from './Illustrations'
@@ -34,14 +34,20 @@ export default function Certification() {
       </div>
       <div className="mt-10">
         <h3 className="mb-3 text-xl font-semibold">{t(c.othersTitle)}</h3>
-        {c.others.length > 0 ? (
-          <ul className="list-disc space-y-1 pl-5">
+        {c.others.length > 0 && (
+          <ul className="space-y-3">
             {c.others.map((o) => (
-              <li key={o.en}>{t(o)}</li>
+              <li key={o.en} className="flex gap-3">
+                <Trophy aria-hidden className="mt-0.5 size-5 shrink-0 text-gold" />
+                <span className="text-navy">{t(o)}</span>
+              </li>
             ))}
           </ul>
-        ) : (
-          <Todo text={c.othersTodo} />
+        )}
+        {c.othersTodo && (
+          <div className="mt-4">
+            <Todo text={c.othersTodo} />
+          </div>
         )}
       </div>
     </Section>

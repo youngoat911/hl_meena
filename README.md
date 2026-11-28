@@ -18,6 +18,7 @@ Needs Node 22.12 or newer.
 All copy, links, stats and media are in **`src/data/site.ts`**. Nothing else needs editing.
 
 - Text is `{ en: '...', hi: '...' }`. `hi` is optional and falls back to English.
+- `showTodos` (top of the file): `false` hides everything still missing; `true` shows it as dashed TODO boxes.
 - `null` means "still TODO". Replace it with the real value and its placeholder goes away (or the hidden stat or icon appears).
 - A `todo: { en: '...' }` entry on a service or on `whoIHelp` is a placeholder: set it to `null` once confirmed.
 - **WhatsApp:** set `contact.phone` with country code. This switches on the form, all booking buttons and the floating button. Until then booking links go to the contact form. With only `contact.email` set, the form opens an email.
@@ -43,23 +44,18 @@ Then set `hero.image.name` to `NAME`. `position` and `zoom` control the crop. `o
 
 | Item | Where in `site.ts` |
 |---|---|
-| City in meta description and keywords | `meta` |
-| State, for the "master life coach Rajasthan" keyword (left out until confirmed) | `meta.keywords` |
 | English only, or Hindi + English | `hindiEnabled` |
 | Years of experience, people coached, YouTube subscribers | `stats` |
-| Background, 2–3 sentences | `about.background` |
-| Story: turning point, learning, calling | `story.parts` |
-| Pull quote | `story.quote` |
 | Coaching methods | `approach.methods` |
-| Target audience | `whoIHelp.todo` |
 | 1-on-1 mode, duration and fee | `services.items[0]` |
 | Whether to offer the free discovery call | `services.items[1]` |
 | Workshops / group sessions | `services.items[2]` |
-| Education, other certifications, awards (including the office trophy) | `certification.others` |
+| Education, other certifications, awards (including the office trophy) | `certification.others`, then set `othersTodo` to `null` |
 | 3–6 YouTube video links | `videos.items` |
-| Facebook reels: confirm whose they are | `socials` |
-| Office address, phone/WhatsApp, email | `contact` |
-| Facebook, Instagram, LinkedIn URLs | `socials` |
+| Facebook: direct profile/page URL (a share link is used for now) | `socials` |
+| Phone/WhatsApp and email (the form and the floating WhatsApp button appear once either is set) | `contact` |
+| Office address (the city is shown for now) | `contact.address` |
+| Instagram, LinkedIn URLs | `socials` |
 
 Also to confirm: the brand line (`brandLine`, three options in `data/content.md`), and the starter copy in "How I Coach" and "Who I Help".
 

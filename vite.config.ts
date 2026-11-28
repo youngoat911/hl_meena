@@ -20,6 +20,12 @@ function seo(): Plugin {
     name: person.name,
     alternateName: person.shortName,
     jobTitle: certification.titleConferred.en,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: person.city,
+      addressRegion: person.region,
+      addressCountry: person.country,
+    },
     description,
     ...(base && { url: base, image: `${base}${imageSrc(hero.image.name)}` }),
     ...(contact.email && { email: contact.email }),

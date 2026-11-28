@@ -1,5 +1,5 @@
 import { ArrowRight, MessageCircle, PhoneCall, Users } from 'lucide-react'
-import { contact, services } from '../data/site'
+import { contact, services, showTodos } from '../data/site'
 import { bookingHref } from '../lib/booking'
 import { useLanguage } from '../lib/language'
 import Button from './Button'
@@ -10,13 +10,18 @@ import Todo from './Todo'
 
 const icons = { session: MessageCircle, call: PhoneCall, group: Users }
 
+// Services still waiting for confirmation, and empty details, stay hidden unless showTodos is on.
+const items = services.items
+  .filter((s) => showTodos || !s.todo)
+  .map((s) => ({ ...s, details: s.details.filter((d) => showTodos || d.value) }))
+
 export default function Services() {
   const { t } = useLanguage()
   return (
     <Section id="coaching" className="bg-white">
       <SectionHeading id="coaching-title">{t(services.title)}</SectionHeading>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {services.items.map((s, i) => {
+      <div className={items.length > 1 ? 'grid gap-6 md:grid-cols-2 lg:grid-cols-3' : 'max-w-xl'}>
+        {items.map((s, i) => {
           const Icon = icons[s.icon]
           return (
             <Reveal
